@@ -1,0 +1,50 @@
+### Auth API Testing with REST Client Extension
+
+### Variables
+@baseUrl = http://localhost:8000
+@username = testuser
+@email = test@example.com
+@password = password123
+
+### 1. Health Check
+GET {{baseUrl}}/
+
+### 2. Register a new user
+POST {{baseUrl}}/signup
+Content-Type: application/json
+
+{
+  "username": "{{username}}",
+  "email": "{{email}}",
+  "password": "{{password}}"
+}
+
+### 3. Login user
+# @name login
+POST {{baseUrl}}/login
+Content-Type: application/json
+
+{
+  "username": "{{username}}",
+  "password": "{{password}}"
+}
+
+### 4. Get current user info (requires token from login)
+GET {{baseUrl}}/me
+Authorization: Bearer {{login.response.body.access_token}}
+
+### 5. Logout
+POST {{baseUrl}}/logout
+Authorization: Bearer {{login.response.body.access_token}}
+
+### 6. Test with invalid credentials
+POST {{baseUrl}}/login
+Content-Type: application/json
+
+{
+  "username": "wronguser",
+  "password": "wrongpassword"
+}
+
+### 7. Test accessing protected endpoint without token
+GET {{baseUrl}}/me

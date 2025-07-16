@@ -1,0 +1,9 @@
+@echo off
+echo Starting Angular Frontend...
+cd frontend\auth-app
+if not exist node_modules (
+    echo Installing npm dependencies...
+    npm install
+)
+echo Starting Angular development server...
+npm start
