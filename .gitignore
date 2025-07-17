@@ -51,6 +51,10 @@ yarn-error.log*
 lerna-debug.log*
 .pnpm-debug.log*
 
+# mcp 
+# Node.js / Angular
+mcp-server/node_modules/
+
 # Angular
 frontend/auth-app/dist/
 frontend/auth-app/tmp/

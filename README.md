@@ -20,6 +20,12 @@ A modern full-stack authentication application built with Angular frontend and F
   - CORS enabled for frontend integration
   - RESTful API endpoints
 
+- **MCP Server**:
+  - Model Context Protocol server for AI integration
+  - Exposes backend APIs as MCP tools
+  - Built with TypeScript and Node.js
+  - Provides auth_signup, auth_login, auth_logout, auth_get_current_user tools
+
 ## Project Structure
 
 ```
@@ -31,25 +37,40 @@ test/
 │   ├── schemas.py          # Pydantic schemas
 │   ├── requirements.txt    # Python dependencies
 │   └── .env               # Environment variables
-└── frontend/               # Angular Frontend
-    └── auth-app/
-        ├── src/
-        │   ├── app/
-        │   │   ├── components/     # Angular components
-        │   │   ├── services/       # Angular services
-        │   │   ├── guards/         # Route guards
-        │   │   └── models/         # TypeScript interfaces
-        │   ├── styles.css          # Global styles
-        │   └── index.html          # Main HTML file
-        ├── package.json            # NPM dependencies
-        └── angular.json            # Angular configuration
+├── frontend/               # Angular Frontend
+│   └── auth-app/
+│       ├── src/
+│       │   ├── app/
+│       │   │   ├── components/     # Angular components
+│       │   │   ├── services/       # Angular services
+│       │   │   ├── guards/         # Route guards
+│       │   │   └── models/         # TypeScript interfaces
+│       │   ├── styles.css          # Global styles
+│       │   └── index.html          # Main HTML file
+│       ├── package.json            # NPM dependencies
+│       └── angular.json            # Angular configuration
+└── mcp-server/             # MCP Server for AI Integration
+    ├── src/
+    │   └── index.ts        # MCP server implementation
+    ├── package.json        # Node.js dependencies
+    ├── tsconfig.json       # TypeScript configuration
+    └── README.md           # MCP server documentation
 ```
 
 ## Prerequisites
 
 - Python 3.8+
-- Node.js 16+
+- Node.js 16+ (for both Angular frontend and MCP server)
 - npm
+
+## Quick Start
+
+### Option 1: Use the provided scripts
+1. **Backend**: Run `start-backend.bat` or `start-backend.ps1`
+2. **Frontend**: Run `start-frontend.bat` or `start-frontend.ps1`
+3. **MCP Server**: Install Node.js first, then run `start-mcp-server.bat` or `start-mcp-server.ps1`
+
+### Option 2: Manual setup (detailed below)
 
 ## Backend Setup
 
@@ -104,6 +125,51 @@ test/
    ```
 
    The application will be available at: `http://localhost:4200`
+
+## MCP Server Setup
+
+The MCP (Model Context Protocol) server exposes the backend APIs as tools that can be used by AI assistants.
+
+### Prerequisites
+1. Ensure Node.js and npm are installed
+2. Backend server must be running on `http://localhost:8000`
+
+### Setup Steps
+
+1. **Install Node.js** (if not already installed):
+   - Download from: https://nodejs.org/
+   - Use the LTS version for Windows
+
+2. **Quick setup with script**:
+   ```bash
+   # Run the setup script
+   start-mcp-server.bat  # or start-mcp-server.ps1
+   ```
+
+3. **Manual setup**:
+   ```bash
+   cd mcp-server
+   npm install
+   npm run build
+   npm start
+   ```
+
+### Available MCP Tools
+
+Once running, the MCP server exposes these tools:
+- `auth_health_check` - Check if the authentication API is running
+- `auth_signup` - Register a new user account
+- `auth_login` - Login with username and password to get JWT token
+- `auth_get_current_user` - Get current user information using JWT token
+- `auth_logout` - Logout current user session
+
+### Testing the Setup
+
+Run the comprehensive test script:
+```bash
+# Test both API and MCP functionality
+test-api-and-mcp.ps1
+```
 
 ## API Endpoints
 
@@ -165,6 +231,13 @@ curl -X GET "http://localhost:8000/me" \
 - **RxJS** - Reactive programming
 - **Angular Router** - Client-side routing
 - **Angular HTTP Client** - HTTP communication
+
+### MCP Server
+- **Model Context Protocol SDK** - MCP implementation
+- **TypeScript** - Programming language
+- **Node.js** - Runtime environment
+- **Axios** - HTTP client for API calls
+- **Zod** - Schema validation
 
 ## Development Notes
 
