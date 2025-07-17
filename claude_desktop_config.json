@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "auth-api-server": {
+      "command": "C:\\Program Files\\nodejs\\node.exe",
+      "args": ["C:\\Users\\pulkit.anchalia\\OneDrive - UKG\\Desktop\\test\\mcp-server\\dist\\index.js"],
+      "env": {
+        "NODE_ENV": "production",
+        "API_BASE_URL": "http://localhost:8000",
+        "PATH": "C:\\Program Files\\nodejs;${PATH}"
+      }
+    }
+  }
+}
