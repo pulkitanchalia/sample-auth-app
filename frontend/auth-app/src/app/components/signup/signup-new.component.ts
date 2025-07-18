@@ -11,26 +11,21 @@ import { UserCreate } from '../../models/user.model';
   standalone: true,
   imports: [CommonModule, FormsModule, RouterModule],
   template: `
-    <div class="min-h-screen bg-gradient-to-br from-green-50 to-emerald-100 flex items-center justify-center px-4 py-8">
-      <div class="card max-w-md w-full">
-        <div class="text-center mb-8">
-          <h2 class="text-3xl font-bold text-gray-900 mb-2">Create account</h2>
-          <p class="text-gray-600">Join us today and get started</p>
-        </div>
+    <div class="container">
+      <div class="card" style="max-width: 400px; margin: 2rem auto;">
+        <h2>Sign Up</h2>
         
         <!-- Google Sign-In Button -->
-        <div class="mb-6">
-          <div #googleSignInButton class="flex justify-center mb-4"></div>
-          <div class="relative flex items-center justify-center mb-6">
-            <div class="border-t border-gray-300 flex-grow"></div>
-            <span class="bg-white px-3 text-sm text-gray-500">or</span>
-            <div class="border-t border-gray-300 flex-grow"></div>
+        <div class="google-signin-container">
+          <div #googleSignInButton class="google-signin-button"></div>
+          <div class="divider">
+            <span>or</span>
           </div>
         </div>
         
-        <form (ngSubmit)="onSubmit()" #signupForm="ngForm" class="space-y-6">
-          <div>
-            <label for="username" class="form-label">Username</label>
+        <form (ngSubmit)="onSubmit()" #signupForm="ngForm">
+          <div class="form-group">
+            <label for="username">Username:</label>
             <input
               type="text"
               id="username"
@@ -38,16 +33,14 @@ import { UserCreate } from '../../models/user.model';
               [(ngModel)]="user.username"
               required
               #username="ngModel"
-              class="form-input"
-              placeholder="Choose a username"
             />
-            <div *ngIf="username.invalid && username.touched" class="alert alert-error mt-2">
+            <div *ngIf="username.invalid && username.touched" class="alert alert-error">
               Username is required
             </div>
           </div>
           
-          <div>
-            <label for="email" class="form-label">Email</label>
+          <div class="form-group">
+            <label for="email">Email:</label>
             <input
               type="email"
               id="email"
@@ -56,17 +49,15 @@ import { UserCreate } from '../../models/user.model';
               required
               email
               #email="ngModel"
-              class="form-input"
-              placeholder="Enter your email"
             />
-            <div *ngIf="email.invalid && email.touched" class="alert alert-error mt-2">
+            <div *ngIf="email.invalid && email.touched" class="alert alert-error">
               <div *ngIf="email.errors?.['required']">Email is required</div>
               <div *ngIf="email.errors?.['email']">Please enter a valid email</div>
             </div>
           </div>
           
-          <div>
-            <label for="password" class="form-label">Password</label>
+          <div class="form-group">
+            <label for="password">Password:</label>
             <input
               type="password"
               id="password"
@@ -75,10 +66,8 @@ import { UserCreate } from '../../models/user.model';
               required
               minlength="6"
               #password="ngModel"
-              class="form-input"
-              placeholder="Create a password"
             />
-            <div *ngIf="password.invalid && password.touched" class="alert alert-error mt-2">
+            <div *ngIf="password.invalid && password.touched" class="alert alert-error">
               <div *ngIf="password.errors?.['required']">Password is required</div>
               <div *ngIf="password.errors?.['minlength']">Password must be at least 6 characters</div>
             </div>
@@ -92,24 +81,139 @@ import { UserCreate } from '../../models/user.model';
             {{ successMessage }}
           </div>
           
-          <button type="submit" class="btn btn-primary w-full" [disabled]="signupForm.invalid || loading">
-            <span *ngIf="loading" class="inline-block animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></span>
-            {{ loading ? 'Creating Account...' : 'Create Account' }}
+          <button type="submit" class="btn btn-primary" [disabled]="signupForm.invalid || loading">
+            {{ loading ? 'Creating Account...' : 'Sign Up' }}
           </button>
         </form>
         
-        <div class="mt-6 text-center">
-          <p class="text-sm text-gray-600">
-            Already have an account? 
-            <a routerLink="/login" class="font-medium text-green-600 hover:text-green-500 transition-colors">
-              Sign in
-            </a>
-          </p>
-        </div>
+        <p style="margin-top: 1rem; text-align: center;">
+          Already have an account? <a routerLink="/login">Login</a>
+        </p>
       </div>
     </div>
   `,
-  styles: []
+  styles: [`
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+    }
+
+    .card {
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .google-signin-container {
+      margin-bottom: 1.5rem;
+    }
+
+    .google-signin-button {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    .divider {
+      text-align: center;
+      margin: 1rem 0;
+      position: relative;
+    }
+
+    .divider:before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: #ddd;
+    }
+
+    .divider span {
+      background: white;
+      padding: 0 1rem;
+      color: #666;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: #007bff;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 0.75rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1rem;
+      text-decoration: none;
+      display: inline-block;
+      text-align: center;
+    }
+
+    .btn-primary {
+      background-color: #007bff;
+      color: white;
+    }
+
+    .btn:hover {
+      opacity: 0.9;
+    }
+
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .alert {
+      padding: 0.75rem;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+    }
+
+    .alert-error {
+      background-color: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+
+    .alert-success {
+      background-color: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+
+    a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  `]
 })
 export class SignupComponent implements OnInit, AfterViewInit {
   @ViewChild('googleSignInButton', { static: false }) googleSignInButton!: ElementRef;
@@ -131,34 +235,18 @@ export class SignupComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit() {
-    // Initialize Google Sign-In with error handling
-    try {
-      this.googleSignInService.initializeGoogleSignIn('277598308233-d09qs87vgpctd320uffsds64511c84tf.apps.googleusercontent.com')
-        .catch(error => {
-          console.warn('Google Sign-In initialization failed:', error);
-        });
-    } catch (error) {
-      console.warn('Google Sign-In not available:', error);
-    }
+    // Initialize Google Sign-In
+    this.googleSignInService.initializeGoogleSignIn('your-google-client-id.apps.googleusercontent.com');
   }
 
   ngAfterViewInit() {
     // Render Google Sign-In button after view is initialized
     setTimeout(() => {
       if (this.googleSignInButton) {
-        try {
-          this.googleSignInService.renderSignInButton(
-            this.googleSignInButton.nativeElement,
-            (response: any) => this.handleGoogleSignIn(response)
-          );
-        } catch (error) {
-          console.warn('Google Sign-In button rendering failed:', error);
-          // Hide the Google sign-in container if it fails
-          const container = document.querySelector('.google-signin-container');
-          if (container) {
-            (container as HTMLElement).style.display = 'none';
-          }
-        }
+        this.googleSignInService.renderSignInButton(
+          this.googleSignInButton.nativeElement,
+          (response: any) => this.handleGoogleSignIn(response)
+        );
       }
     }, 100);
   }

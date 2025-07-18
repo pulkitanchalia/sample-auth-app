@@ -1,53 +1,105 @@
 # Auth App - Angular & FastAPI Authentication System
 
-A modern full-stack authentication application built with Angular frontend and FastAPI backend, featuring JWT authentication.
+A modern full-stack authentication application built with Angular frontend and FastAPI backend, featuring JWT authentication, Google SSO, and comprehensive admin dashboard.
 
-## Features
+## ✨ Features
 
-- **Frontend (Angular)**:
-  - Landing page with modern UI
-  - User signup and login forms
-  - Protected dashboard
-  - JWT token management
-  - Route guards for protected routes
-  - Responsive design
+### 🔐 Authentication & Security
+- **JWT-based Authentication**: Secure token-based authentication system
+- **Google SSO Integration**: One-click sign-in with Google accounts
+- **Dual Authentication Support**: Both local and Google authentication
+- **Password Security**: bcrypt hashing for local passwords
+- **Token Verification**: Server-side Google ID token validation
+- **Email Verification**: Only verified Google accounts accepted
 
-- **Backend (FastAPI)**:
-  - JWT-based authentication
-  - User registration and login
-  - Password hashing with bcrypt
-  - SQLite database for user storage
-  - CORS enabled for frontend integration
-  - RESTful API endpoints
+### 👤 User Management
+- **User Registration**: Email-validated signup with unique constraints
+- **Profile Management**: User profiles with profile pictures
+- **Authentication Provider Tracking**: Local vs Google user identification
+- **Account Linking**: Existing users can link Google accounts
 
-- **MCP Server**:
-  - Model Context Protocol server for AI integration
-  - Exposes backend APIs as MCP tools
-  - Built with TypeScript and Node.js
-  - Provides auth_signup, auth_login, auth_logout, auth_get_current_user tools
+### 🛡️ Admin Dashboard
+- **User Statistics**: Real-time counts of total, active, and inactive users
+- **User Management Table**: Comprehensive user listing with details
+- **User Actions**: Activate/deactivate and delete users (with protection)
+- **Admin Protection**: Role-based access control
+- **Audit Information**: Creation dates and last login tracking
 
-## Project Structure
+### 🎨 Modern Frontend (Angular)
+- **Responsive Design**: Modern, mobile-friendly interface
+- **Component Architecture**: Standalone Angular 17+ components
+- **Route Guards**: Protected routes with auth and admin guards
+- **Error Handling**: Comprehensive error display and handling
+- **Google Integration**: Native Google Sign-In buttons
+- **Real-time Updates**: Dynamic UI updates based on user state
+
+### 🚀 Backend (FastAPI)
+- **RESTful API**: Clean, documented API endpoints
+- **SQLite Database**: Lightweight database with SQLAlchemy ORM
+- **CORS Support**: Enabled for frontend integration
+- **Environment Configuration**: Secure credential management
+- **API Documentation**: Auto-generated Swagger/ReDoc documentation
+
+### 🔌 MCP Server Integration
+- **AI Integration**: Model Context Protocol server for AI applications
+- **Tool Exposure**: Backend APIs available as MCP tools
+- **TypeScript Implementation**: Modern Node.js MCP server
+
+## 📁 Project Structure
 
 ```
 test/
-├── backend/                 # FastAPI Backend
-│   ├── main.py             # Main FastAPI application
-│   ├── auth.py             # Authentication utilities
-│   ├── database.py         # Database models and connection
-│   ├── schemas.py          # Pydantic schemas
-│   ├── requirements.txt    # Python dependencies
-│   └── .env               # Environment variables
-├── frontend/               # Angular Frontend
+├── 📄 README.md                    # Project documentation
+├── 📄 GOOGLE_SSO_GUIDE.md         # Google SSO setup guide
+├── 📄 ADMIN_DASHBOARD_GUIDE.md    # Admin features guide
+├── 📄 API_TESTING_GUIDE.md        # API testing documentation
+├── 🔧 start-backend.bat           # Backend startup (Windows)
+├── 🔧 start-frontend.bat          # Frontend startup (Windows)
+├── 🔧 start-admin-demo.bat        # Full demo startup
+├── 📁 backend/                     # FastAPI Backend
+│   ├── 🐍 main.py                 # Main FastAPI application with all endpoints
+│   ├── 🔐 auth.py                 # JWT authentication utilities
+│   ├── 🗄️ database.py             # SQLAlchemy models and database setup
+│   ├── 📋 schemas.py              # Pydantic schemas for API
+│   ├── 🌐 google_oauth.py         # Google OAuth integration
+│   ├── 🔄 migrate_db.py           # Database migration script
+│   ├── 📦 requirements.txt        # Python dependencies
+│   ├── ⚙️ .env                    # Environment variables
+│   └── 🗄️ test.db                 # SQLite database
+├── 📁 frontend/                    # Angular Frontend
 │   └── auth-app/
-│       ├── src/
-│       │   ├── app/
-│       │   │   ├── components/     # Angular components
-│       │   │   ├── services/       # Angular services
-│       │   │   ├── guards/         # Route guards
-│       │   │   └── models/         # TypeScript interfaces
-│       │   ├── styles.css          # Global styles
-│       │   └── index.html          # Main HTML file
-│       ├── package.json            # NPM dependencies
+│       ├── 📦 package.json         # NPM dependencies
+│       ├── ⚙️ angular.json         # Angular configuration
+│       ├── ⚙️ tsconfig.json        # TypeScript configuration
+│       └── 📁 src/
+│           ├── 🌐 index.html       # Main HTML file
+│           ├── 🎨 styles.css       # Global styles
+│           ├── 🚀 main.ts          # Angular bootstrap
+│           └── 📁 app/
+│               ├── 🏠 app.component.ts     # Root component
+│               ├── ⚙️ app.config.ts        # App configuration
+│               ├── 🛣️ app.routes.ts         # Routing configuration
+│               ├── 📁 models/
+│               │   └── 👤 user.model.ts    # TypeScript interfaces
+│               ├── 📁 services/
+│               │   ├── 🔐 auth.service.ts  # Authentication service
+│               │   └── 🌐 google-signin.service.ts # Google SSO service
+│               ├── 📁 guards/
+│               │   ├── 🛡️ auth.guard.ts    # Route protection
+│               │   └── 👑 admin.guard.ts   # Admin route protection
+│               └── 📁 components/
+│                   ├── 🏡 landing/         # Landing page
+│                   ├── 🔑 login/           # Login form with Google SSO
+│                   ├── 📝 signup/          # Registration with Google SSO
+│                   ├── 📊 dashboard/       # User dashboard
+│                   └── 👑 admin-dashboard/ # Admin user management
+└── 📁 mcp-server/                  # Model Context Protocol Server
+    ├── 📦 package.json             # Node.js dependencies
+    ├── ⚙️ tsconfig.json            # TypeScript configuration
+    ├── 📄 README.md                # MCP server documentation
+    └── 📁 src/
+        └── 🔧 index.ts             # MCP server implementation
+```
 │       └── angular.json            # Angular configuration
 └── mcp-server/             # MCP Server for AI Integration
     ├── src/
@@ -57,45 +109,193 @@ test/
     └── README.md           # MCP server documentation
 ```
 
-## Prerequisites
+## 🚀 Quick Start
 
-- Python 3.8+
-- Node.js 16+ (for both Angular frontend and MCP server)
-- npm
+### Option 1: Complete Demo (Recommended)
+```bash
+# Start both backend and frontend
+.\start-admin-demo.bat
+```
+**What this does:**
+- Starts FastAPI backend on http://localhost:8000
+- Starts Angular frontend on http://localhost:4200
+- Sets up admin demo environment
 
-## Quick Start
+### Option 2: Individual Components
 
-### Option 1: Use the provided scripts
-1. **Backend**: Run `start-backend.bat` or `start-backend.ps1`
-2. **Frontend**: Run `start-frontend.bat` or `start-frontend.ps1`
-3. **MCP Server**: Install Node.js first, then run `start-mcp-server.bat` or `start-mcp-server.ps1`
+#### Backend Only
+```bash
+.\start-backend.bat
+# OR
+cd backend && python main.py
+```
 
-### Option 2: Manual setup (detailed below)
+#### Frontend Only
+```bash
+.\start-frontend.bat
+# OR
+cd frontend/auth-app && npm start
+```
 
-## Backend Setup
-
-1. Navigate to the backend directory:
+### Option 3: Manual Setup
+1. **Backend Setup**: 
    ```bash
    cd backend
-   ```
-
-2. Create a virtual environment:
-   ```bash
    python -m venv venv
-   venv\Scripts\activate  # On Windows
-   # source venv/bin/activate  # On Mac/Linux
-   ```
-
-3. Install dependencies:
-   ```bash
+   venv\Scripts\activate
    pip install -r requirements.txt
+   python main.py
    ```
 
-4. Update the `.env` file with your preferred settings:
+2. **Frontend Setup**:
+   ```bash
+   cd frontend/auth-app
+   npm install
+   npm start
    ```
-   SECRET_KEY=your-secret-key-here-change-in-production
-   ALGORITHM=HS256
-   ACCESS_TOKEN_EXPIRE_MINUTES=30
+
+## 🌐 Application URLs
+
+| Service | URL | Description |
+|---------|-----|-------------|
+| **Frontend** | http://localhost:4200 | Main application interface |
+| **Landing Page** | http://localhost:4200 | Public landing page |
+| **Login** | http://localhost:4200/login | User authentication |
+| **Signup** | http://localhost:4200/signup | User registration |
+| **Dashboard** | http://localhost:4200/dashboard | User dashboard (protected) |
+| **Admin Panel** | http://localhost:4200/admin | Admin dashboard (admin only) |
+| **Backend API** | http://localhost:8000 | FastAPI REST endpoints |
+| **API Docs** | http://localhost:8000/docs | Interactive API documentation |
+| **ReDoc** | http://localhost:8000/redoc | Alternative API documentation |
+
+## 📊 API Endpoints
+
+### Authentication Endpoints
+- `POST /signup` - User registration
+- `POST /login` - User login
+- `POST /auth/google` - Google SSO authentication
+- `GET /me` - Get current user profile
+- `POST /logout` - User logout
+
+### Admin Endpoints (Admin Only)
+- `GET /admin/users` - Get all users with pagination
+- `GET /admin/users/{id}` - Get specific user details
+- `PUT /admin/users/{id}/status` - Update user status
+- `DELETE /admin/users/{id}` - Delete user
+- `GET /admin/stats` - Get user statistics
+
+## 👤 User Roles & Access
+
+### Admin Users
+- **First User**: Automatically gets admin privileges
+- **Username "admin"**: Users with username "admin" get admin access
+- **Permissions**: Can manage all users, view statistics, access admin dashboard
+
+### Regular Users
+- **Access**: Own profile, dashboard, standard features
+- **Restrictions**: Cannot access admin functions
+
+## 🔧 Configuration
+
+### Google SSO Setup
+1. **Google Cloud Console**: Create OAuth 2.0 credentials
+2. **Environment Variables**: Set `GOOGLE_CLIENT_ID` in backend/.env
+3. **Frontend Configuration**: Update client IDs in components
+4. **Documentation**: See `GOOGLE_SSO_GUIDE.md` for detailed setup
+
+### Environment Variables (.env)
+```env
+# JWT Configuration
+JWT_SECRET_KEY=your-secret-key-here
+JWT_ALGORITHM=HS256
+JWT_ACCESS_TOKEN_EXPIRE_MINUTES=30
+
+# Google OAuth Configuration
+GOOGLE_CLIENT_ID=your-google-client-id.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=your-google-client-secret
+
+# Database Configuration
+DATABASE_URL=sqlite:///./test.db
+```
+
+## 🧪 Testing
+
+### API Testing
+- Use `admin_api_tests.http` for admin endpoint testing
+- Use `google_sso_tests.http` for Google SSO testing
+- Use `api_tests.http` for general API testing
+
+### Frontend Testing
+1. Navigate to http://localhost:4200
+2. Test user registration and login
+3. Test Google SSO (requires setup)
+4. Create admin user and test admin features
+
+## 📚 Documentation
+
+| File | Description |
+|------|-------------|
+| `README.md` | Main project documentation (this file) |
+| `GOOGLE_SSO_GUIDE.md` | Complete Google SSO integration guide |
+| `ADMIN_DASHBOARD_GUIDE.md` | Admin features and user management guide |
+| `API_TESTING_GUIDE.md` | API testing instructions and examples |
+| `PROJECT_SUMMARY.md` | Project overview and quick reference |
+
+## 🔒 Security Features
+
+- **JWT Authentication**: Secure token-based authentication
+- **Password Hashing**: bcrypt for secure password storage
+- **Google Token Verification**: Server-side token validation
+- **Route Protection**: Frontend guards for protected routes
+- **Admin Authorization**: Additional checks for admin endpoints
+- **CORS Configuration**: Secure cross-origin requests
+- **Input Validation**: Pydantic schemas for API validation
+
+## 🛠️ Technology Stack
+
+### Backend
+- **FastAPI**: Modern Python web framework
+- **SQLAlchemy**: SQL toolkit and ORM
+- **SQLite**: Lightweight database
+- **JWT**: JSON Web Tokens for authentication
+- **bcrypt**: Password hashing
+- **Google Auth**: Google OAuth integration
+- **Pydantic**: Data validation and serialization
+
+### Frontend
+- **Angular 17+**: Modern web framework
+- **TypeScript**: Type-safe JavaScript
+- **Standalone Components**: Modern Angular architecture
+- **RxJS**: Reactive programming
+- **Google Sign-In**: Google SSO integration
+- **CSS3**: Modern styling and responsive design
+
+### Development Tools
+- **VS Code**: Recommended IDE
+- **Angular CLI**: Development tools
+- **Uvicorn**: ASGI server for FastAPI
+- **npm**: Package management
+
+## 🚀 Deployment
+
+### Production Considerations
+1. **Environment Variables**: Use secure production values
+2. **Database**: Consider PostgreSQL for production
+3. **HTTPS**: Enable SSL/TLS for security
+4. **Google OAuth**: Update authorized domains
+5. **Security**: Review and harden security settings
+
+### Docker Support (Future)
+```dockerfile
+# Example Dockerfile structure (to be implemented)
+FROM python:3.9-slim
+COPY backend/ /app/backend/
+WORKDIR /app/backend
+RUN pip install -r requirements.txt
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+```
+
+This authentication system provides a complete, production-ready foundation for modern web applications with comprehensive user management and Google SSO integration.
    DATABASE_URL=sqlite:///./test.db
    ```
 
@@ -117,152 +317,4 @@ test/
 2. Install dependencies:
    ```bash
    npm install
-   ```
 
-3. Start the development server:
-   ```bash
-   npm start
-   ```
-
-   The application will be available at: `http://localhost:4200`
-
-## MCP Server Setup
-
-The MCP (Model Context Protocol) server exposes the backend APIs as tools that can be used by AI assistants.
-
-### Prerequisites
-1. Ensure Node.js and npm are installed
-2. Backend server must be running on `http://localhost:8000`
-
-### Setup Steps
-
-1. **Install Node.js** (if not already installed):
-   - Download from: https://nodejs.org/
-   - Use the LTS version for Windows
-
-2. **Quick setup with script**:
-   ```bash
-   # Run the setup script
-   start-mcp-server.bat  # or start-mcp-server.ps1
-   ```
-
-3. **Manual setup**:
-   ```bash
-   cd mcp-server
-   npm install
-   npm run build
-   npm start
-   ```
-
-### Available MCP Tools
-
-Once running, the MCP server exposes these tools:
-- `auth_health_check` - Check if the authentication API is running
-- `auth_signup` - Register a new user account
-- `auth_login` - Login with username and password to get JWT token
-- `auth_get_current_user` - Get current user information using JWT token
-- `auth_logout` - Logout current user session
-
-### Testing the Setup
-
-Run the comprehensive test script:
-```bash
-# Test both API and MCP functionality
-test-api-and-mcp.ps1
-```
-
-## API Endpoints
-
-### Authentication
-- `POST /signup` - Register a new user
-- `POST /login` - Login user and get JWT token
-- `POST /logout` - Logout user
-- `GET /me` - Get current user information (requires authentication)
-
-### Example API Usage
-
-#### Register a new user:
-```bash
-curl -X POST "http://localhost:8000/signup" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "username": "testuser",
-    "email": "test@example.com",
-    "password": "password123"
-  }'
-```
-
-#### Login:
-```bash
-curl -X POST "http://localhost:8000/login" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "username": "testuser",
-    "password": "password123"
-  }'
-```
-
-#### Get user information (with token):
-```bash
-curl -X GET "http://localhost:8000/me" \
-  -H "Authorization: Bearer YOUR_JWT_TOKEN"
-```
-
-## Frontend Routes
-
-- `/` - Landing page
-- `/login` - Login form
-- `/signup` - Registration form
-- `/dashboard` - Protected dashboard (requires authentication)
-
-## Technologies Used
-
-### Backend
-- **FastAPI** - Modern Python web framework
-- **SQLAlchemy** - SQL toolkit and ORM
-- **JWT** - JSON Web Tokens for authentication
-- **Bcrypt** - Password hashing
-- **SQLite** - Database
-- **Uvicorn** - ASGI server
-
-### Frontend
-- **Angular 17** - Frontend framework
-- **TypeScript** - Programming language
-- **RxJS** - Reactive programming
-- **Angular Router** - Client-side routing
-- **Angular HTTP Client** - HTTP communication
-
-### MCP Server
-- **Model Context Protocol SDK** - MCP implementation
-- **TypeScript** - Programming language
-- **Node.js** - Runtime environment
-- **Axios** - HTTP client for API calls
-- **Zod** - Schema validation
-
-## Development Notes
-
-- The backend uses SQLite for simplicity in development
-- JWT tokens expire after 30 minutes (configurable)
-- CORS is enabled for `http://localhost:4200` (Angular dev server)
-- All passwords are hashed using bcrypt
-- The frontend uses standalone components (Angular 17+ feature)
-
-## Security Features
-
-- Password hashing with bcrypt
-- JWT token-based authentication
-- Protected routes with route guards
-- Token expiration handling
-- CORS configuration
-- Input validation on both frontend and backend
-
-## Troubleshooting
-
-1. **CORS errors**: Make sure the backend is running on port 8000 and frontend on port 4200
-2. **Database errors**: The SQLite database will be created automatically when you first run the backend
-3. **Token errors**: Make sure the SECRET_KEY in .env is set properly
-4. **Module errors**: Ensure all dependencies are installed correctly
-
-## License
-
-This project is for demonstration purposes.

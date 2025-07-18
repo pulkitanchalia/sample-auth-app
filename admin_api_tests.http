@@ -1,0 +1,70 @@
+# Admin Dashboard API Test Script
+# Run this after starting the backend server
+
+# First, create an admin user (username: admin)
+POST http://localhost:8000/signup
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "email": "admin@example.com",
+  "password": "admin123"
+}
+
+###
+
+# Login as admin
+POST http://localhost:8000/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "admin123"
+}
+
+###
+
+# Create a test user
+POST http://localhost:8000/signup
+Content-Type: application/json
+
+{
+  "username": "testuser",
+  "email": "test@example.com",
+  "password": "test123"
+}
+
+###
+
+# Get all users (admin only) - Replace YOUR_TOKEN with the token from login
+GET http://localhost:8000/admin/users
+Authorization: Bearer YOUR_TOKEN
+
+###
+
+# Get user statistics (admin only)
+GET http://localhost:8000/admin/stats
+Authorization: Bearer YOUR_TOKEN
+
+###
+
+# Update user status (admin only) - Replace {user_id} with actual ID
+PUT http://localhost:8000/admin/users/2/status
+Content-Type: application/json
+Authorization: Bearer YOUR_TOKEN
+
+{
+  "is_active": false
+}
+
+###
+
+# Get specific user (admin only)
+GET http://localhost:8000/admin/users/2
+Authorization: Bearer YOUR_TOKEN
+
+###
+
+# Delete user (admin only) - Replace {user_id} with actual ID (can't delete yourself)
+DELETE http://localhost:8000/admin/users/2
+Authorization: Bearer YOUR_TOKEN

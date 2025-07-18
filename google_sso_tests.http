@@ -1,0 +1,58 @@
+# Google SSO API Test Script
+# Run this after starting the backend server and setting up Google OAuth
+
+# Test regular signup (should still work)
+POST http://localhost:8000/signup
+Content-Type: application/json
+
+{
+  "username": "testuser",
+  "email": "test@example.com",
+  "password": "test123"
+}
+
+###
+
+# Test regular login (should still work)
+POST http://localhost:8000/login
+Content-Type: application/json
+
+{
+  "username": "testuser",
+  "password": "test123"
+}
+
+###
+
+# Test Google OAuth login/signup
+# Replace GOOGLE_ID_TOKEN with actual token from Google Sign-In
+POST http://localhost:8000/auth/google
+Content-Type: application/json
+
+{
+  "token": "GOOGLE_ID_TOKEN_HERE"
+}
+
+###
+
+# Get user profile (should show Google info for Google users)
+GET http://localhost:8000/me
+Authorization: Bearer YOUR_JWT_TOKEN
+
+###
+
+# Admin: Get all users (should show auth provider)
+GET http://localhost:8000/admin/users
+Authorization: Bearer ADMIN_JWT_TOKEN
+
+###
+
+# Admin: Get user stats
+GET http://localhost:8000/admin/stats
+Authorization: Bearer ADMIN_JWT_TOKEN
+
+###
+
+# Test logout
+POST http://localhost:8000/logout
+Authorization: Bearer YOUR_JWT_TOKEN

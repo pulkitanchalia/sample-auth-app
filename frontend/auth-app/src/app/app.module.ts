@@ -5,19 +5,11 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { LandingComponent } from './components/landing/landing.component';
-import { LoginComponent } from './components/login/login.component';
-import { SignupComponent } from './components/signup/signup.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { routes } from './app.routes';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    LandingComponent,
-    LoginComponent,
-    SignupComponent,
-    DashboardComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,

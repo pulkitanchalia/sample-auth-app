@@ -1,7 +1,8 @@
-from sqlalchemy import create_engine, Column, Integer, String, Boolean
+from sqlalchemy import create_engine, Column, Integer, String, Boolean, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from dotenv import load_dotenv
+from datetime import datetime
 import os
 
 load_dotenv()
@@ -19,8 +20,13 @@ class User(Base):
     id = Column(Integer, primary_key=True, index=True)
     username = Column(String, unique=True, index=True)
     email = Column(String, unique=True, index=True)
-    hashed_password = Column(String)
+    hashed_password = Column(String, nullable=True)  # Make nullable for Google users
     is_active = Column(Boolean, default=True)
+    created_at = Column(DateTime, default=datetime.utcnow)
+    last_login = Column(DateTime, nullable=True)
+    google_id = Column(String, unique=True, nullable=True)  # Google user ID
+    profile_picture = Column(String, nullable=True)  # Google profile picture URL
+    auth_provider = Column(String, default="local")  # "local" or "google"
 
 def create_tables():
     Base.metadata.create_all(bind=engine)

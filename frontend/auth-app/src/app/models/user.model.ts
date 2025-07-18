@@ -3,6 +3,11 @@ export interface User {
   username: string;
   email: string;
   is_active: boolean;
+  created_at?: string;
+  last_login?: string;
+  google_id?: string;
+  profile_picture?: string;
+  auth_provider?: string;
 }
 
 export interface UserCreate {
@@ -14,6 +19,20 @@ export interface UserCreate {
 export interface UserLogin {
   username: string;
   password: string;
+}
+
+export interface GoogleLoginRequest {
+  token: string;
+}
+
+export interface UserStatusUpdate {
+  is_active: boolean;
+}
+
+export interface UserStats {
+  total_users: number;
+  active_users: number;
+  inactive_users: number;
 }
 
 export interface Token {
